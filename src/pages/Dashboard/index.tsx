@@ -29,12 +29,6 @@ interface Balance {
   total: string;
 }
 
-interface RequestTransaction {
-  created_at: string;
-  value: number;
-  type: string;
-}
-
 const Dashboard: React.FC = () => {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
   const [balance, setBalance] = useState<Balance>({} as Balance);
@@ -44,7 +38,7 @@ const Dashboard: React.FC = () => {
       const { data } = await api.get('/transactions');
 
       setTransactions(
-        data.transactions.map((transaction: RequestTransaction) => {
+        data.transactions.map((transaction: Transaction) => {
           let formattedValue = formatValue(transaction.value);
 
           if (transaction.type === 'outcome')
